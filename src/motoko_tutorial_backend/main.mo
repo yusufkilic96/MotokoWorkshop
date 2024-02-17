@@ -1,7 +1,7 @@
-import Map "mo:base/HashMap";
-import Text "mo:base/Text";
-import Hash "mo:base/Hash";
 import Nat "mo:base/Nat";
+import Hash "mo:base/Hash";
+import Text "mo:base/Text";
+import Map "mo:base/HashMap";
 import Iter "mo:base/Iter";
 
 actor Assistant {
@@ -11,7 +11,7 @@ actor Assistant {
   };
   
   func natHash(n: Nat) : Hash.Hash {
-    Text.hash(Nat.toText(n));
+    Text.hash(Nat.toText(n))
   };
 
   var todos = Map.HashMap<Nat, ToDo>(0, Nat.equal, natHash);
@@ -45,7 +45,7 @@ actor Assistant {
   };
 
   public func clearCompleted() : async () {
-    todos := Map.mapfilter<Nat, ToDo, ToDo>(todo, Nat.equal, natHash, func(_, todo) { if (todo.completed) null else ?todo});
+    todos := Map.mapFilter<Nat, ToDo, ToDo>(todos, Nat.equal, natHash, func(_, todo) { if (todo.completed) null else ?todo});
   };
 
 }
